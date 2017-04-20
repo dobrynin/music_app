@@ -7,6 +7,9 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
+  <% if logged_in? %>
+    <%= button_to "Sign Out", sessions_url, method: :delete %>
+  <% end %>
 
   <body>
     <%= yield %>
