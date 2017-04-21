@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_reader :password
+
   after_initialize :ensure_session_token
 
   validates :email, :session_token, uniqueness: true, presence: true
@@ -20,6 +22,7 @@ class User < ApplicationRecord
 
   def reset_session_token!
     self.session_token = self.class.generate_session_token
+    self.save!
   end
 
   def self.find_by_credentials(email, password)

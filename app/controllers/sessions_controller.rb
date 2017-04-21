@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :check_login, :new
+
   def new
     render :new
   end
@@ -21,7 +23,11 @@ class SessionsController < ApplicationController
   def destroy
     logout_user!
     redirect_to new_session_url
-  end 
+  end
+
+  def check_login
+    redirect_to user_url(current_user) if logged_in?
+  end
 
 
 end
